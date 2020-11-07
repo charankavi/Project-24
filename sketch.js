@@ -3,55 +3,55 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
+const Render = Matter.Render;
 
 var ground;
 
-var bin1,bin2,bin3;
+var bin1;
 
 var paper;
+var engine,world;
 
-function preload()
-{
-	
-}
 
 function setup() {
-	createCanvas(800, 700);
-
+	createCanvas(1600, 700);
+    rectMode(CENTER);
 
 	engine = Engine.create();
 	world = engine.world;
 
-	//Create the Bodies Here.
 
-	ground = new Ground(400,700,800,20);
+	bin1 = new Bin(1200,685);
+	
+    paper = new Paper(200,450,40);
+	ground = new Ground(width/2,700,width,20);
 
-	bin1 = new Bin(600,640,10,100);
-	bin2 = new Bin(700,640,10,100);
-	bin3 = new Bin(650,690,100,10);
-
-    paper = new Paper(50,690);
+	var render = Render.create({
+		element: document.body,
+		engine: engine,
+		options: {
+		  width: 1200,
+		  height: 700,
+		  wireframes: false
+		}
+	}
+	);
 
 	Engine.run(engine);
   
+	
 }
 
 
 function draw() {
   rectMode(CENTER);
-  background(0);
-  
-  drawSprites();
- 
-  ground.display();
-
-  
+  background(225);
 
   bin1.display();
-  bin2.display();
-  bin3.display();
 
-paper.display();
+   paper.display();
+
+   ground.display();
 
 
 
